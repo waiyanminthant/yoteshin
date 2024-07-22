@@ -15,10 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <HeaderBar />
-        <NavBar />
-        {children}
-        <FooterBar />
+        <div className="flex flex-col h-fit">
+          <HeaderBar />
+          <NavBar />
+          <div className="flex-grow">
+            {children}
+          </div>
+          <FooterBar />
+        </div>
       </body>
     </html>
   );
