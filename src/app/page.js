@@ -2,14 +2,14 @@ import { ListWidget } from "./components/widgets/ListWidget";
 
 const API_KEY = process.env.API_KEY
 
-export default async function Home({ searchParams }) {
+export default async function Home() {
 
   return (
     <div>
-      <ListWidget type={"movie"} API_KEY={API_KEY} params={"popular"} title={"Popular Movies"} layout={"verticle"} />
-      <ListWidget type={"shows"} API_KEY={API_KEY} params={"popular"} title={"Popular Shows"} layout={"verticle"} />
-      <ListWidget type={"movie"} API_KEY={API_KEY} params={"top_rated"} title={"Top Rated Movies"} layout={"verticle"} />
-      <ListWidget type={"shows"} API_KEY={API_KEY} params={"top_rated"} title={"Top Rated Shows"} layout={"verticle"} />
+      <ListWidget type={"movies"} params={"popular"} layout={"verticle"} />
+      <ListWidget type={"shows"} params={"popular"}  layout={"verticle"} />
+      <ListWidget type={"movies"} params={"top_rated"} layout={"verticle"} />
+      <ListWidget type={"shows"} params={"top_rated"} layout={"verticle"} />
     </div>
   );
 }
