@@ -4,14 +4,24 @@ import { ErrorWidget } from "./WidgetError";
 import { HorizontalCard } from "./HorizontalCard";
 import { capLetters } from "../functions";
 import { PagniatoinWidget } from "./PagingWidget";
+import dayjs from "dayjs";
 
 const API_KEY = process.env.API_KEY
+const API_URL = process.env.API_URL
 
 export async function ListWidget({ params, type, layout, page }) {
 
   const searchParams = params
   const pageNumber = page || 1
-  const res = (type === "movies") ? await fetch(`https://api.themoviedb.org/3/movie/${searchParams}?page=${pageNumber}&api_key=${API_KEY}`, { next: { revalidate: 36000 } }) : await fetch(`https://api.themoviedb.org/3/tv/${searchParams}?page=${pageNumber}&api_key=${API_KEY}`, { next: { revalidate: 36000 } });
+  const upcomingParams = `discover/${type}?${type === 'movie' ? 'primary_release_date.gte' : 'first_air_date.gte'}=${dayjs().format('YYYY-MM-DD')}&sort_by=primary_release_date.asc&page=${pageNumber}&api_key=${API_KEY}`
+  const normalParams = `${type}/${searchParams}?page=${pageNumber}&api_key=${API_KEY}`
+
+  const res = params === "upcoming" ? (
+    await fetch(`${API_URL}/${upcomingParams}`, { next: { revalidate: 36000 } })
+  ) : (
+    await fetch(`${API_URL}/${normalParams}`, { next: { revalidate: 36000 } })
+  )
+
   const data = await res.json();
   const title = capLetters(params + " " + type)
 
@@ -22,7 +32,7 @@ export async function ListWidget({ params, type, layout, page }) {
       <div>
         <h3 className="flex content-center items-center gap-4 text-xl font-extrabold py-4 mx-8">
           <span>
-            {type === "movies" ? <FaFilm /> : <FaTv />}
+            {type === "movie" ? <FaFilm /> : <FaTv />}
           </span>
           {title}
         </h3>
@@ -39,10 +49,10 @@ export async function ListWidget({ params, type, layout, page }) {
 
   if (data.results && layout === "horizontal") {
     return (
-      <div>
+      <div className="w-full">
         <h3 className="flex content-center items-center gap-4 text-xl font-extrabold py-4">
           <span>
-            {type === "movies" ? <FaFilm /> : <FaTv />}
+            {type === "movie" ? <FaFilm /> : <FaTv />}
           </span>
           <span>
             {title}

@@ -6,10 +6,10 @@ export default async function Home() {
 
   return (
     <div>
-      <ListWidget type={"movies"} params={"popular"} layout={"verticle"} />
-      <ListWidget type={"shows"} params={"popular"}  layout={"verticle"} />
-      <ListWidget type={"movies"} params={"top_rated"} layout={"verticle"} />
-      <ListWidget type={"shows"} params={"top_rated"} layout={"verticle"} />
+      <ListWidget type={"movie"} params={"popular"} layout={"verticle"} />
+      <ListWidget type={"tv"} params={"popular"}  layout={"verticle"} />
+      <ListWidget type={"movie"} params={"top_rated"} layout={"verticle"} />
+      <ListWidget type={"tv"} params={"top_rated"} layout={"verticle"} />
     </div>
   );
 }
