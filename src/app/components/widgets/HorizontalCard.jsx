@@ -11,7 +11,7 @@ export function HorizontalCard({ data, type }) {
   const title = (type === "movie") ? data.title : data.original_name
 
   return (
-    <a href={`/${type}/${data.id}`}>
+    <a href={`/${type === "movie" ? 'movies' : "tv"}/${data.id}`}>
       <div className="flex bg-slate-800 rounded-xl hover:cursor-pointer">
         <div className="h-56">
           <div className="relative w-36 h-56">

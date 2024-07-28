@@ -11,7 +11,7 @@ export function VerticleCard({ data, type }) {
   const title = (type === "movie") ? data.title : data.original_name
 
   return (
-    <a href={`/${type}/${data.id}`} className="container bg-slate-900 w-52 h-96 rounded-lg mb-3 hover:cursor-pointer flex flex-col items-center justify-around">
+    <a href={`/${type === "movie" ? 'movies' : "tv"}/${data.id}`} className="container bg-slate-900 w-52 h-96 rounded-lg mb-3 hover:cursor-pointer flex flex-col items-center justify-around">
       <div className="relative w-52 h-80">
         <Image
           placeholder="blur"
