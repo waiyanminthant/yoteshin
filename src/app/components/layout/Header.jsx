@@ -1,6 +1,7 @@
 import { MenuItem } from "./MenuItem";
 import { FaHouse, FaFilm, FaTv, FaCircleInfo } from "react-icons/fa6";
 
+//function to inject header bar in the layout.js
 export function HeaderBar() {
   return (
     <div className="fixed w-full z-50">

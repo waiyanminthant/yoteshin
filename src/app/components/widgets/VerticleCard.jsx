@@ -6,9 +6,10 @@ const POSTER_URL = process.env.POSTER_URL
 
 export function VerticleCard({ data, type }) {
 
-  const poster = POSTER_URL + data.poster_path
+  //setup poster, release date and title
+  const poster = data.poster_path === null ? '/poster_placeholder.svg' : POSTER_URL + data.poster_path 
   const releaseDate = dayjs(data.release_date).format("DD MMM YYYY")
-  const title = (type === "movie") ? data.title : data.original_name
+  const title = (type === "movie") ? data.title : data.name
 
   return (
     <a href={`/${type === "movie" ? 'movies' : "tv"}/${data.id}`} className="container bg-slate-900 w-52 h-96 rounded-lg mb-3 hover:cursor-pointer flex flex-col items-center justify-around">

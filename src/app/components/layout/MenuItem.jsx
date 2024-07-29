@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+//function to render the Menu Items in the Header Bar
 export function MenuItem({ title, url, Icon }) {
     return (
         <div>

@@ -5,16 +5,23 @@ export function NavLinks({ type, active }) {
 
   const movieLinks = ["popular", "top_rated", "now_playing", "upcoming"]
   const showLinks = ["popular", "top_rated", "airing_today", "on_the_air", "upcoming"]
+  const searchLinks = ['movie', 'tv']
+
+  const urlType = type === "movie" ? "movies" :'tv'
+
+  //tailwindCSS class to be used according to the screen size and active status
   const classLarge = "flex gap-2 items-center px-2 font-bold cursor-pointer hover:text-slate-700"
   const classLargeActive = "flex gap-2 items-center px-2 font-bold cursor-pointer text-slate-700"
-  const classSmall = "flex items-center gap-4 bg-slate-300 px-1 rounded-xl text-slate-950 text-xs font-bold"
+  const classSmall = "flex items-center gap-1 bg-slate-300 px-1 rounded-xl text-slate-950 text-xs font-bold"
 
+  //render link according to the screen size
   function LinkItem({ link, size }) {
     return (
       <a
         className={size === "large" ? link === active ? classLargeActive : classLarge : classSmall}
-        href={`/${type}?type=${link}`}
+        href={`/${urlType}?type=${link}`}
       >
+        {link === active && size != "large" ? <FaCheck /> : null}
         {capLetters(link)}
       </a>
     )

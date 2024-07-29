@@ -2,6 +2,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { HeaderBar } from "./components/layout/Header";
 import { FooterBar } from "./components/layout/Footer";
+import { Suspense } from "react";
+import LoadingWidget from "./loading";
+import { SearchBar } from "./components/layout/Search";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +20,10 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <div className="flex flex-col justify-between h-screen">
           <HeaderBar />
-          <div className="mt-16">
+          <SearchBar />
+          <Suspense fallback={<LoadingWidget />}>
             {children}
-          </div>
+          </Suspense>
           <FooterBar />
         </div>
       </body>

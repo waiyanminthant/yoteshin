@@ -11,9 +11,12 @@ export function PagniatoinWidget({ page, totalPage }) {
   const pathname = usePathname()
   const currentPage = page
   const buttons = []
+
+  //css class for normal and active buttons
   const buttonClass = "px-2 py-1 bg-slate-300 font-bold text-sm text-slate-900 rounded-sm hover:opacity-80 cursor-pointer"
   const activeClass = "px-2 py-1 bg-slate-300 font-bold text-sm text-slate-900 rounded-sm opacity-80"
 
+  //setup query string to be passed in the url
   const newQueryString = useCallback(
     (name, value) => {
       const params = new URLSearchParams(searchParams)
@@ -24,8 +27,8 @@ export function PagniatoinWidget({ page, totalPage }) {
     [searchParams]
   )
 
-  //render buttons for more than 6 pages & active page is less than equals to 6
-  if (totalPage > 6 && currentPage <= 6) {
+  //render buttons for more than 5 pages & active page is less than equals to 5
+  if (totalPage > 5 && currentPage <= 5) {
     for (let i = 0; i < 7; i++) {
       if (i + 1 === currentPage) {
         buttons.push(
@@ -45,8 +48,8 @@ export function PagniatoinWidget({ page, totalPage }) {
     buttons.push(<span key={totalPage} className={buttonClass} onClick={() => { router.push(pathname + "?" + newQueryString('page', totalPage)) }}>{totalPage}</span>)
   }
 
-  //render buttons for more than 6 pages & active page is greater than 6 but more than 6 pages away from end
-  if (totalPage > 6 && currentPage > 6 && currentPage <= totalPage - 6) {
+  //render buttons for more than 5 pages & active page is greater than 5 but more than 5 pages away from end
+  if (totalPage > 5 && currentPage > 5 && currentPage <= totalPage - 5) {
     buttons.push(<span key={1} className={buttonClass} onClick={() => { router.push(pathname + "?" + newQueryString('page', 1)) }}>1</span>)
     buttons.push(<span key={"filler"} >...</span>)
     for (let i = -3; i < 4; i++) {
@@ -68,11 +71,11 @@ export function PagniatoinWidget({ page, totalPage }) {
     buttons.push(<span key={totalPage} className={buttonClass} onClick={() => { router.push(pathname + "?" + newQueryString('page', totalPage)) }}>{totalPage}</span>)
   }
 
-  //render buttons for more than 6 pages & active page is greater than 6 but less than 6 pages away from end
-  if (totalPage > 6 && currentPage > totalPage - 6) {
+  //render buttons for more than 5 pages & active page is greater than 5 but less than 5 pages away from end
+  if (totalPage > 5 && currentPage > totalPage - 5) {
     buttons.push(<span key={1} className={buttonClass} onClick={() => { router.push(pathname + "?" + newQueryString('page', 1)) }}>1</span>)
     buttons.push(<span key={"filler"} >...</span>)
-    for (let i = totalPage - 6; i < totalPage; i++) {
+    for (let i = totalPage - 5; i < totalPage; i++) {
       if (i === Number(currentPage - 1)) {
         buttons.push(
           <span key={i} className={activeClass}>
@@ -86,8 +89,8 @@ export function PagniatoinWidget({ page, totalPage }) {
   }
 
 
-  //render the buttons for total page less than 6
-  if (totalPage <= 6) {
+  //render the buttons for total page less than 5
+  if (totalPage <= 5) {
     for (let i = 0; i < totalPage; i++) {
       if (i + 1 === currentPage) {
         buttons.push(

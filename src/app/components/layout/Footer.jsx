@@ -1,3 +1,4 @@
+//function to inject footer in the layout.js
 export function FooterBar() {
   return (
     <div className="flex px-8 py-6 mt-8 items-center justify-between bg-slate-900 sticky bottom-0 z-50">
