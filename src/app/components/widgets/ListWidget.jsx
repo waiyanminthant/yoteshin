@@ -16,6 +16,15 @@ export async function ListWidget({ params, type, layout, page, id, query }) {
   let fetchURL;
   let title;
 
+  var options ={
+      next: { revalidate: 3600 },
+      method: "GET",
+      headers: { 
+        accept: 'application/json',
+        Authorization: `Bearer ${API_KEY}`
+      }
+    }
+
   switch (params) {
     case "similar":
       title = "You May Also Like..."
@@ -35,23 +44,22 @@ export async function ListWidget({ params, type, layout, page, id, query }) {
   //switch fetch url according to the input params
   switch (params) {
     case "upcoming":
-      fetchURL = `${API_URL}/discover/${type}?${type === 'movie' ? 'primary_release_date.gte' : 'first_air_date.gte'}=${dayjs().format('YYYY-MM-DD')}&sort_by=primary_release_date.asc&page=${pageNumber}&api_key=${API_KEY}`;
+      fetchURL = `${API_URL}/discover/${type}?${type === 'movie' ? 'primary_release_date.gte' : 'first_air_date.gte'}=${dayjs().format('YYYY-MM-DD')}&sort_by=primary_release_date.asc&page=${pageNumber}`;
       break;
     case "similar":
-      fetchURL = `${API_URL}/${type}/${id}/similar?page=${pageNumber}&api_key=${API_KEY}`;
+      fetchURL = `${API_URL}/${type}/${id}/similar?page=${pageNumber}`;
       break;
     case "search":
-      fetchURL = `${API_URL}/search/multi?query=${query}&page=${pageNumber}&api_key=${API_KEY}`;
+      fetchURL = `${API_URL}/search/multi?query=${query}&page=${pageNumber}`;
       break;
     default:
-      fetchURL = `${API_URL}/${type}/${searchParams}?page=${pageNumber}&api_key=${API_KEY}`;
+      fetchURL = `${API_URL}/${type}/${searchParams}?page=${pageNumber}`;
       break;
   }
 
   //fetch data
-  const res = await fetch(fetchURL, { next: { revalidate: 36000 } });
+  const res = await fetch(fetchURL, options);
   const data = await res.json();
-
 
   //show error widget if there is no results
   if (!data.results) return <ErrorWidget />
@@ -67,7 +75,7 @@ export async function ListWidget({ params, type, layout, page, id, query }) {
           {title}
         </h3>
         <div className="flex justify-between w-screen">
-          <div className="flex w-screen overflow-scroll [&>div]:flex-shrink-0 gap-4 ml-8">
+          <div className="flex w-screen overflow-x-auto no-scrollbar [&>div]:flex-shrink-0 gap-4 ml-8">
             {data.results.map((data) => {
               return <VerticleCard key={data.id} data={data} type={type} />
             })}

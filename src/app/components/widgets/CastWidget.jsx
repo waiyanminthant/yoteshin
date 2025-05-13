@@ -5,8 +5,17 @@ const API_KEY = process.env.API_KEY
 
 export async function CastWidget({ type, id }) {
 
+  var options ={
+      next: { revalidate: 3600 },
+      method: "GET",
+      headers: { 
+        accept: 'application/json',
+        Authorization: `Bearer ${API_KEY}`
+      }
+    }
+
   //fetch cast details
-  const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}/${type === "movie" ? "credits" : "aggregate_credits"}?api_key=${API_KEY}`, { next: { revalidate: 36000 } })
+  const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}/${type === "movie" ? "credits" : "aggregate_credits"}`, options)
   const data = await res.json();
 
   //show error if no cast is fetched
@@ -26,7 +35,7 @@ export async function CastWidget({ type, id }) {
           Top Billed Cast
         </h3>
         <div className="px-8 flex justify-between w-screen">
-          <div className="flex w-screen overflow-scroll [&>div]:flex-shrink-0 gap-4">
+          <div className="flex w-screen overflow-scroll [&>div]:flex-shrink-0 gap-4 no-scrollbar">
             {topCast.map(cast => {
               return <CastCard key={cast.id} details={cast} />
             })}

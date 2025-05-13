@@ -18,10 +18,10 @@ export function ItemDetails({ details, type }) {
   return (
     <div className="h-fit">
       {/* background-image */}
-      <div className="absolute blur bg-cover w-full h-[450px]" style={{ backgroundImage: `url(${POSTER_URL}/${details.backdrop_path})` }}>
+      <div className="absolute blur bg-cover w-full h-[600px]" style={{ backgroundImage: `url(${POSTER_URL}/${details.backdrop_path})` }}>
       </div>
       {/* everything else */}
-      <div className="pt-8 px-8 flex flex-col md:flex-row gap-12 backdrop-blur-0 backdrop-brightness-90 w-full items-center md:items-start h-fit md:h-[460px]">
+      <div className="pt-8 px-8 flex flex-col md:flex-row gap-12 backdrop-brightness-100 w-full items-center md:items-start h-fit md:h-[460px]">
         <div className="relative w-64 min-h-96 rounded-lg">
           <Image
             placeholder="blur"

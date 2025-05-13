@@ -10,4 +10,7 @@ We value your feedback and suggestions. If you have any questions, comments, or 
 - NextJS with TailWindCSS
 - Movie & Shows data is provided by [TMDB API](https://developer.themoviedb.org/docs/getting-started)
 
+##### Note
+- To run the app, TMDB API Key must be added to the env file.
+
 #### Coded By Waiyan Min Thant

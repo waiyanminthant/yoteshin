@@ -30,7 +30,7 @@ export function ReviewCard({ details }) {
       <div className="px-4 pt-4">
         <FaQuoteLeft />
       </div>
-      <div className="text-sm px-8 py-4 line-clamp-4 h-32 overflow-scroll">
+      <div className="text-sm px-8 py-4 line-clamp-4 h-32 overflow-scroll no-scrollbar">
         {details.content}
       </div>
       <div className="px-4 pb-4 flex justify-end">

@@ -1,4 +1,5 @@
 // function to capitalize every first letter of the phrase
+
 export function capLetters(phrase) {
 
   const sanitizedPhrase = phrase.replaceAll("_", " ")

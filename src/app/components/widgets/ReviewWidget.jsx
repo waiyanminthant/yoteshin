@@ -5,7 +5,16 @@ const API_KEY = process.env.API_KEY
 
 export async function ReviewWidget({ type, id }) {
 
-  const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}/reviews?api_key=${API_KEY}`, { next: { revalidate: 36000 } })
+  var options ={
+      next: { revalidate: 3600 },
+      method: "GET",
+      headers: { 
+        accept: 'application/json',
+        Authorization: `Bearer ${API_KEY}`
+      }
+    }
+
+  const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}/reviews`, options)
   const reviewList = await res.json()
 
   if (!reviewList.results) {
@@ -23,7 +32,7 @@ export async function ReviewWidget({ type, id }) {
           Latest Reviews
         </h3>
         <div className="px-8 flex justify-between w-screen">
-          <div className="flex w-screen overflow-scroll [&>div]:flex-shrink-0 gap-4">
+          <div className="flex w-screen overflow-scroll [&>div]:flex-shrink-0 gap-4 no-scrollbar  ">
             {finalArray.map(review => {
               return <ReviewCard key={review.id} details={review} />
             })}
